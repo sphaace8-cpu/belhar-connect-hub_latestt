@@ -7,7 +7,7 @@ import { useJobs } from "@/lib/hooks";
 import { useProfile } from "@/lib/auth";
 
 
-export default createFileRoute("/member/dashboard")({
+export const Route = createFileRoute("/member/dashboard")({
   head: () => ({
     meta: [
       { title: "Member Dashboard — Connectly" },
