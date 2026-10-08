@@ -4,8 +4,10 @@ import { AppShell } from "@/components/AppShell";
 import { JobCard, StatCard, Section } from "@/components/ui-kit";
 import { categories, categoryEmoji } from "@/lib/data";
 import { useJobs } from "@/lib/hooks";
+import { useProfile } from "@/lib/auth";
 
-export const Route = createFileRoute("/member/dashboard")({
+
+export default createFileRoute("/member/dashboard")({
   head: () => ({
     meta: [
       { title: "Member Dashboard — Connectly" },
@@ -23,12 +25,13 @@ export const Route = createFileRoute("/member/dashboard")({
 function MemberDashboard() {
   const [cat, setCat] = useState<string>("All");
   const { jobs } = useJobs();
+  const { profile } = useProfile();
   const list = cat === "All" ? jobs : jobs.filter((j) => j.category === cat);
 
   return (
     <AppShell
       role="member"
-      title="Goeie dag, Fatima 👋"
+           title={profile?.full_name ? `Good day, ${profile.full_name} 👋` : "Good day 👋"}
       subtitle="Belhar Ext 15, Cape Town"
       action={
         <Link to="/member/post-job" className="btn-primary">
