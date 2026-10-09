@@ -59,7 +59,7 @@ export function AppShell({
   const label = effectiveRole === "member" ? "Community Member" : "Worker";
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[linear-gradient(160deg,#e6f2ea,#f6faf7)]">
       <header className="sticky top-0 z-40 border-b border-border bg-surface">
         <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-6">
           <Logo to={effectiveRole === "member" ? "/member/dashboard" : "/worker/dashboard"} />
