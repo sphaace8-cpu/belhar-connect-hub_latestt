@@ -86,7 +86,7 @@ export function JobCard({
 }) {
   const to = view === "member" ? "/member/job/$jobId" : "/worker/job/$jobId";
   return (
-    <article className="card-surface flex flex-col gap-3 p-5 transition-shadow hover:shadow-[var(--shadow-lift)]">
+    <article className="card-surface flex flex-col gap-3 p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
