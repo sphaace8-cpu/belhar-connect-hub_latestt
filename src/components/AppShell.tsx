@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import  { useEffect, type ReactNode } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Logo } from "./Logo";
-import { initials, useProfile, useSignOut } from "@/lib/auth";
+import { initials, useProfile, useSignOut, useUserId } from "@/lib/auth";
 
 type NavItem = { label: string; to: string; icon: string };
 
@@ -41,6 +41,16 @@ export function AppShell({
 }) {
   const { profile } = useProfile();
   const signOut = useSignOut();
+       const navigate = useNavigate();
+     const { userId, isLoading: checkingUser } = useUserId();
+
+     useEffect(() => {
+       if (!checkingUser && !userId) {
+         navigate({ to: "/login", search: { next: window.location.pathname } });
+       }
+     }, [checkingUser, userId, navigate]);
+
+     if (checkingUser || !userId) return null;
 
   const effectiveRole: "member" | "worker" =
     role ?? (profile?.role === "worker" ? "worker" : "member");

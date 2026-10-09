@@ -1,8 +1,20 @@
-// Routes that require a signed-in user.
-export const PROTECTED_ROUTES = ["/dashboard", "/profile"] as const;
+// Sections of the app that require a signed-in user.
+// A path is protected if it equals one of these or starts with one followed by "/".
+const PROTECTED_PREFIXES = [
+  "/member",
+  "/worker",
+  "/messages",
+  "/notifications",
+  "/profile",
+  "/settings",
+  "/earnings",
+] as const;
 
-export type ProtectedRoute = (typeof PROTECTED_ROUTES)[number];
+export type ProtectedRoute = string;
 
 export function isProtectedRoute(path: unknown): path is ProtectedRoute {
-  return typeof path === "string" && (PROTECTED_ROUTES as readonly string[]).includes(path);
+  return (
+    typeof path === "string" &&
+    PROTECTED_PREFIXES.some((prefix) => path === prefix || path.startsWith(prefix + "/"))
+  );
 }
